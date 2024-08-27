@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      {% for msg in messages %}
+      <div
+        class="alert {% if msg.tags == 'error' %}alert-danger{% elif msg.tags == 'success' %}alert-success{% else %}alert-warning{% endif %} alert-dismissible fade show"
+        role="alert">
+        <strong>اهلاً، </strong>{{ msg }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="close"></button>
+      </div>
+      {% endfor %}
+
+      <h1 class="page-title">المنتجات</h1>
+
+      <div class="products-container">
+        {% for p in p %}
+        <div class="product-card">
+          <a href="{% url 'pro_s' p.id %}" class="product-link">
+            <h3 class="product-name">{{ p.name }}</h3>
+            <p class="product-price">سعر: {{ p.price }} ريال</p>
+            <p class="product-date">تاريخ الإضافة: {{ p.date }}</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
